@@ -11,13 +11,15 @@ export class HomeComponent implements OnInit {
   public serverIP: any;
   public serverPORT: any;
   public output: any = {};
-
+  public historylist: any;
+  public loading: Boolean = false;
   constructor(private restService: RestService) { }
 
   ngOnInit() {
   }
 
   public sendingIPs() {
+    this.loading = true;
     const val = {
       serverIP: this.serverIP,
       serverPORT: this.serverPORT
@@ -26,6 +28,13 @@ export class HomeComponent implements OnInit {
       .subscribe((data: any) => {
         console.log(data);
         this.output = data;
+        this.getHistory();
       });
+  }
+  public getHistory() {
+    this.restService.get('http://127.0.0.1:5000/historygetter').subscribe((data: any) => {
+      this.loading = false;
+      this.historylist = data.historylist;
+    });
   }
 }

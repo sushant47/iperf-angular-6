@@ -1,20 +1,27 @@
-<form name="form" (submit)="sendingIPs()">
+<img *ngIf="loading" src="assets/my-spinner.gif" /> <!-- Or use a CSS one if you like -->
+<div *ngIf="!loading">
+  <form name="form" (submit)="sendingIPs()">
+    <div>
+    Server IP: <input type="text" [(ngModel)]="serverIP" name="serverIP" />
+    </div>
+    <div>
+    Server Port: <input type="text" [(ngModel)]="serverPORT" name="serverPORT" />
+    </div>
+    <div>
+    <button type="submit" class="btn btn-danger" (click)="output.status='Connecting..';output.ulspeed='';output.dlspeed=''">Calculate Bits Per Second!</button>
+    </div>
   <div>
-  Server IP: <input type="text" [(ngModel)]="serverIP" name="serverIP" />
+  <br>
+  <h4>{{output?.status}}</h4>
+  <br>
+  <h4>Bits per second from client to server: {{output?.ulspeed}}</h4>
+  <br>
+  <h4>Bits per second from server to client: {{output?.dlspeed}}</h4>
+  <br>
   </div>
-  <div>
-  Server Port: <input type="text" [(ngModel)]="serverPORT" name="serverPORT" />
-  </div>
-  <div>
-  <button type="submit" class="btn btn-danger" (click)="output.status='Connecting..';output.ulspeed='';output.dlspeed=''">Calculate Bits Per Second!</button>
-  </div>
-<div>
-<br>
-<h4>{{output?.status}}</h4>
-<br>
-<h4>Bits per second from client to server: {{output?.ulspeed}}</h4>
-<br>
-<h4>Bits per second from server to client: {{output?.dlspeed}}</h4>
-<br>
+  </form>
 </div>
-</form>
+<!-- <button (click)="getHistory()">Get History</button> -->
+<div *ngIf="historylist">
+<app-history [historylist]="historylist"></app-history>
+</div>

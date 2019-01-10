@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { RestService } from '../shared/services/rest.service';
 
 @Component({
   selector: 'app-history',
@@ -7,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  public historylist: any;
+  @Input() historylist: any;
 
-  constructor() { }
+  constructor(private restService: RestService) { }
 
   ngOnInit() {
   }
 
+  public gettingHistory() {
+    this.restService.get('http://127.0.0.1:5000/historygetter').subscribe((data: any) => {
+      this.historylist = data.historylist;
+    });
+  }
 }

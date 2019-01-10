@@ -1,6 +1,6 @@
 <form name="form" ng-submit="gettingHistory()">
   <button type="submit" class="btn btn-danger" (click)="historylist.state='Connecting..'">View History of Bits Per Seconds in Table Below!</button>
-  <div [(ngModel)]="historylist" name="historylist">
+  <div>
   <br>
   <h4>{{historylist.state}}</h4>
   <br>
@@ -13,7 +13,7 @@
   <td>Server to Client Bits Per Second</td>
   <td>Client to Server Bits Per Second</td>
   </tr>
-  <tr *ngFor="let x of historylist.historylist">
+  <tr *ngFor="let x of historylist">
   <td>{{x.timestamp}}</td>
   <td>{{x.server_ip}}</td>
   <td>{{x.server_port}}</td>
